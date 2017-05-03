@@ -1,0 +1,9 @@
+---
+- name: Lynis play
+  hosts: test-kitchen
+
+  vars:
+    #lynis_version: 1.0.0-1
+
+  roles:
+    - ansible-lynis

@@ -1,0 +1,33 @@
+---
+
+- name: Install lynis prereq
+  yum:
+    name:  "{{ item }}"
+    state: present
+  with_items: [ ca-certificates curl nss openssl ]
+
+
+## yum_repository available in Ansible v2.0.x or earlier
+##
+#- name: Add InfluxData yum repository file
+#  yum_repository:
+#    name: lynis
+#    description: "CISOfy Software - Lynis package"
+#    baseurl: "{{ lynis_yum_repo_baseurl }}"
+#    gpgkey: "https://packages.cisofy.com/keys/cisofy-software-rpms-public.key"
+#    gpgcheck: yes
+#    enabled:  yes
+#  when: lynis_install_from_pkg_repo
+
+- name: Add lynis yum repository
+  template:
+    src:   lynis.yum.repo.j2
+    dest:  /etc/yum.repos.d/lynis.repo
+    owner: root
+    group: root
+    mode:  0644
+
+- name: Install lynis
+  yum:
+    name:  "lynis-{{ lynis_version|default('*') }}"
+    state: present

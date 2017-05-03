@@ -1,0 +1,22 @@
+---
+
+- name: Install the 'https' method for apt
+  apt:
+    name: apt-transport-https
+    state: present
+
+- name: Download and install lynis apt public signing key
+  apt_key:
+    url:   "{{ lynis_signing_key_url }}"
+    state: present
+
+- name: Add lynis apt repository definition to apt sources list
+  apt_repository: 
+    repo:         "{{ lynis_apt_repo }}"
+    update_cache: yes
+    state:        present
+
+- name: Install lynis
+  apt: 
+    name:  "lynis={{ lynis_version|default('*') }}"
+    state: present

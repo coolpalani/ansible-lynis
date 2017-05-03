@@ -1,0 +1,4 @@
+---
+
+- name: Install lynis
+  include: "install-{{ ansible_os_family|lower }}.yml"

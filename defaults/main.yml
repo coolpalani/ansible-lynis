@@ -1,0 +1,19 @@
+---
+
+
+influxdb_user:  influxdb
+influxdb_group: "{{ influxdb_user }}"
+
+#############
+## Package
+lynis_version: '*'                # e.g. 0.13.0 or * for latest
+lynis_signing_key_url: "http://packages.cisofy.com/keys/cisofy-software-public.key"
+lynis_apt_repo: "deb https://packages.cisofy.com/community/lynis/deb/ {{ ansible_distribution_release }} main"
+lynis_yum_repo_baseurl: 'https://packages.cisofy.com/community/lynis/rpm/'
+
+#################
+## Configuration
+lynis_log_dir:  /var/log/influxdb
+lynis_conf_dir: /etc/lynis
+lynis_pid_dir:  /var/run/influxdb
+lynis_home_dir: /var/share/lynis
